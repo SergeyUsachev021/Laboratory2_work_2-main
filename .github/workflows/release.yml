@@ -91,7 +91,7 @@ jobs:
         id: create_releaseq
         uses: actions/create-release@v
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}qq
         with:
           tag_name: "release-${{ github.run_number }}"
           release_name: "Release ${{ github.run_number }}"
