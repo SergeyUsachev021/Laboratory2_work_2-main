@@ -92,9 +92,9 @@ jobs:
         #Создание выпуска: используется actions/create-release для создания нового выпуска на GitHub. Он устанавливает тег и название выпуска на основе текущего номера запуска, помечая его как не черновик и не предварительный выпуск.
       - name: Create Release
         id: create_releaseq
-        uses: actions/create-release@v1
+        uses: actions/create-release@v
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}qq
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: "release-${{ github.run_number }}"
           release_name: "Release ${{ github.run_number }}"
