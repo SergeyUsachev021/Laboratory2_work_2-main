@@ -83,7 +83,7 @@ jobs:
             echo "Linux package exists."
           else
             echo "Linux package does not exist."
-            exit 1
+            exit 1qq
           fi
 
         #Создание выпуска: используется actions/create-release для создания нового выпуска на GitHub. Он устанавливает тег и название выпуска на основе текущего номера запуска, помечая его как не черновик и не предварительный выпуск.
