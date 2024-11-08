@@ -1,13 +1,11 @@
 name: C++ CI
 
-
 #Запускающие события: Рабочий процесс настроен на запуск push событий для main и feature/github_actions ветвей.
 on:
   push:
     branches:
       - main
       - feature/github_actions
-
 
 #Разрешения: Предоставляет доступ на запись к содержимому репозитория, разрешая действия по изменению файлов.
 permissions:
@@ -17,8 +15,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 60  # Увеличьте время выполнения, если это необходимо, Настройка тайм-аута: задание будет прервано через 60 минут. Это значение можно изменить, если ожидается более длительное выполнение.
-
+    timeout-minutes: 60 # Увеличьте время выполнения, если это необходимо, Настройка тайм-аута: задание будет прервано через 60 минут. Это значение можно изменить, если ожидается более длительное выполнение.
 
     #Шаг проверки: использует actions/checkout действие для клонирования репозитория, включая его подмодули.
     steps:
@@ -55,7 +52,7 @@ jobs:
         run: |
           cd build
           cmake .. -DPATCH_VERSION=${{ github.run_number }}
-          
+
         #Сборка проекта: компилирует проект с помощью CMake изbuildкаталога.
       - name: Build the project
         run: |
@@ -105,7 +102,6 @@ jobs:
       - name: Debug - List contents of build directory before upload
         run: ls -l ./build
 
-
         #Загрузить ресурс выпуска: используется actions/upload-release-asset для загрузки созданного пакета Linux в качестве ресурса во вновь созданный релиз GitHub. Он определяет пути и тип контента для правильной обработки.
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
@@ -113,14 +109,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./build/IFilterProject-0.1.0-Linux.sh  # Убедитесь, что путь правильный для созданного пакета 
-          asset_name: IFilterProject-0.1.0-Linux.sh 
+          asset_path: ./build/IFilterProject-0.1.0-Linux.sh # Убедитесь, что путь правильный для созданного пакета
+          asset_name: IFilterProject-0.1.0-Linux.sh
           asset_content_type: application/x-sh
 
         #Завершение отладки: выводит сообщение о завершении работы
       - name: Debug - End
         run: echo "Ending the job"
-      
+
         #Заключительный шаг отладки: выводит текущий рабочий каталог и перечисляет все файлы в build каталоге в конце задания для окончательной проверки и устранения неполадок.
       - name: Debug - List all files in build directory at the end of the job
         run: |
